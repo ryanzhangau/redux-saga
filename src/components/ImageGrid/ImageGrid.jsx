@@ -3,10 +3,11 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { loadImages } from '../../store/actions';
 import Button from '../Button/Button';
+import Stats from '../Stats/Stats';
 import './styles.css';
 
 const ImageGrid = props => {
-  const { images, error, loadImages, isLoading } = props;
+  const { images, error, loadImages, isLoading, imageStats } = props;
   useEffect(() => {
     loadImages();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -17,6 +18,7 @@ const ImageGrid = props => {
         {images &&
           images.map(image => (
             <div key={image.id} className={`item item-${Math.ceil(image.height / image.width)}`}>
+              <Stats stats={imageStats[image.id]} />
               <img src={image.urls.small} alt={image.alt_description} />
             </div>
           ))}
@@ -37,11 +39,12 @@ ImageGrid.defaultProps = {
   images: []
 };
 
-const mapStateToProps = ({ isLoading, images, error }) => {
+const mapStateToProps = ({ isLoading, images, error, imageStats }) => {
   return {
     isLoading,
     images,
-    error
+    error,
+    imageStats
   };
 };
 
