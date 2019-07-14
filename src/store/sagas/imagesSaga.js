@@ -1,4 +1,4 @@
-import { IMAGES } from '../constants/Images';
+import { IMAGES } from '../constants';
 import { takeEvery, select, call, put } from 'redux-saga/effects';
 import { fetchImages } from '../../api/index';
 import { setImages, setError } from '../actions';
